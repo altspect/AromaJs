@@ -1,0 +1,22 @@
+{
+  "name": "server",
+  "description": "basic server",
+  "main": "index.js",
+  "dependencies": {
+    "body-parser": "^2.2.1",
+    "cors": "^2.8.5",
+    "express": "^5.1.0",
+    "nodemon": "^3.1.11"
+  },
+  "type": "module",
+  "scripts": {
+    "test": "test",
+    "start": "nodemon index.js",
+    "start:frontend": "npx serve client"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "concurrently": "^9.2.1"
+  }
+}
