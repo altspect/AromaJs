@@ -2,7 +2,7 @@ import express from "express";
 import bodyParser from "body-parser";
 import cors from "cors";
 import path from "path";
-import { fileURLToPath } from "url"; // Needed for __dirname
+import { fileURLToPath } from "url";
 
 const app = express();
 const port = 3000;
@@ -13,14 +13,13 @@ app.use(bodyParser.json());
 app.use(
   bodyParser.urlencoded({
     extended: true,
-  })
+  }),
 );
 app.use(cors());
 
 app.use(express.static("client"));
 
 app.get(/.*/, (req, res) => {
-  console.log("catch all catched");
   res.sendFile(path.resolve(__dirname, "client", "index.html"));
 });
 

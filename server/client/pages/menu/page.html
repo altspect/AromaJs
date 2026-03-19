@@ -14,7 +14,62 @@
     }
   </style>
 
-  <h2>This is Menu page</h2>
-  <p>Be even gladder</p>
-  <slot></slot>
+  <h2>Menu</h2>
+  <form class="list-holder" id="form">
+    <ul class="list-holder-list">
+      <h3>To drink</h3>
+      <li class="list-holder-list__item">
+        <label for="espresso">Espresso</label>
+        <input type="checkbox" name="products" id="espresso" value="espresso" />
+      </li>
+      <li class="list-holder-list__item">
+        <label for="cappuccino">Cappuccino</label>
+        <input
+          type="checkbox"
+          name="products"
+          id="cappuccino"
+          value="cappuccino"
+        />
+      </li>
+      <li class="list-holder-list__item">
+        <label for="cold-brew">Cold Brew</label>
+        <input
+          type="checkbox"
+          name="products"
+          id="cold-brew"
+          value="cold-brew"
+        />
+      </li>
+
+      <h3>To eat</h3>
+      <li class="list-holder-list__item">
+        <label for="croissant">Butter Croissant</label>
+        <input
+          type="checkbox"
+          name="products"
+          id="croissant"
+          value="croissant"
+        />
+      </li>
+      <li class="list-holder-list__item">
+        <label for="avocado-toast">Avocado Toast</label>
+        <input
+          type="checkbox"
+          name="products"
+          id="avocado-toast"
+          value="avocado-toast"
+        />
+      </li>
+      <li class="list-holder-list__item">
+        <label for="blueberry-muffin">Blueberry Muffin</label>
+        <input
+          type="checkbox"
+          name="products"
+          id="blueberry-muffin"
+          value="blueberry-muffin"
+        />
+      </li>
+    </ul>
+    <input type="submit" value="Submit" />
+  </form>
 </template>

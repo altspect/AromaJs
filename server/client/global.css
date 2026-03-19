@@ -1,0 +1,22 @@
+.link-global {
+  position: relative;
+  display: inline-block;
+  z-index: 1000;
+
+  img {
+    pointer-events: none;
+  }
+}
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #740580;
+  color: white;
+  padding: 10px;
+}
+
+.navbar a:nth-of-type(1) {
+  margin-right: 20px;
+}

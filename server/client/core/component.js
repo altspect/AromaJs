@@ -5,9 +5,11 @@ export default class Component extends HTMLElement {
   constructor() {
     super();
     this.attachShadow({ mode: "open" });
+    console.log("attaching shadow");
   }
 
   static async #getTemplateContent(url) {
+    console.log("fetching content");
     if (!Component.#templateCache) {
       Component.#templateCache = new Map();
     }
@@ -18,6 +20,7 @@ export default class Component extends HTMLElement {
 
     const promise = fetch(`http://localhost:3000/${url}`)
       .then((res) => {
+        console.log("res", res);
         if (!res.ok)
           throw new Error(`HTTP ${res.status} - Could not load ${url}`);
         return res.text();
@@ -26,10 +29,11 @@ export default class Component extends HTMLElement {
         const parser = new DOMParser();
         const doc = parser.parseFromString(htmlString, "text/html");
         const template = doc.querySelector("template");
+        console.log("what");
 
         if (!template) {
           throw new Error(
-            `No <template> element found in the fetched HTML from ${url}`
+            `No <template> element found in the fetched HTML from ${url}`,
           );
         }
         return template.content;
@@ -61,8 +65,9 @@ export default class Component extends HTMLElement {
       const content = await Component.#getTemplateContent(this.templateURL);
       this.shadowRoot.innerHTML = ""; // Clear any error messages
       this.shadowRoot.appendChild(content.cloneNode(true));
+
+      if (this.onRendered) this.onRendered();
     } catch (error) {
-      console.error("Component load failed:", error);
       this.shadowRoot.innerHTML = `<p style="color: red;">Error: ${error.message}</p>`;
     }
   }
