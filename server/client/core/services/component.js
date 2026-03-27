@@ -5,11 +5,9 @@ export default class Component extends HTMLElement {
   constructor() {
     super();
     this.attachShadow({ mode: "open" });
-    console.log("attaching shadow");
   }
 
   static async #getTemplateContent(url) {
-    console.log("fetching content");
     if (!Component.#templateCache) {
       Component.#templateCache = new Map();
     }
@@ -17,10 +15,10 @@ export default class Component extends HTMLElement {
     if (Component.#templateCache.has(url)) {
       return Component.#templateCache.get(url);
     }
-
+    console.log(url);
     const promise = fetch(`http://localhost:3000/${url}`)
       .then((res) => {
-        console.log("res", res);
+        console.log(res);
         if (!res.ok)
           throw new Error(`HTTP ${res.status} - Could not load ${url}`);
         return res.text();
@@ -29,7 +27,7 @@ export default class Component extends HTMLElement {
         const parser = new DOMParser();
         const doc = parser.parseFromString(htmlString, "text/html");
         const template = doc.querySelector("template");
-        console.log("what");
+        console.log(template);
 
         if (!template) {
           throw new Error(

@@ -1,4 +1,5 @@
-import Component from "../../core/component.js";
+import Component from "../../core/services/component.js";
+import Cart from "../../core/services/cart.js";
 
 export default class CartPage extends Component {
   constructor() {
@@ -8,6 +9,7 @@ export default class CartPage extends Component {
 
   onRendered() {
     console.log("thing has dun");
+    console.log(Cart.items);
   }
 }
 

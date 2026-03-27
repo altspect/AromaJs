@@ -1,0 +1,42 @@
+<template id="main-component-template">
+  <style>
+    .link-global {
+      position: relative;
+      display: inline-block;
+      z-index: 1000;
+
+      img {
+        pointer-events: none;
+      }
+    }
+
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: #740580;
+      color: white;
+      padding: 10px;
+    }
+
+    .navbar a:nth-of-type(1) {
+      margin-right: 20px;
+    }
+  </style>
+  <div class="navbar">
+    <div class="navbar__left-container">
+      <a class="link-global" href="menu">Menu</a>
+      <a class="link-global" href="main">About</a>
+    </div>
+    <div class="navbar__right-container">
+      <a class="link-global" href="cart">
+        <img
+          src="./assets/cart.svg"
+          alt="Cart image"
+          width="30px"
+          height="30px"
+        />
+      </a>
+    </div>
+  </div>
+</template>

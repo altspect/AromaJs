@@ -1,4 +1,5 @@
-import Component from "../../core/component.js";
+import Component from "../../core/services/component.js";
+import Cart from "../../core/services/cart.js";
 
 export default class MenuPage extends Component {
   constructor() {
@@ -13,6 +14,7 @@ export default class MenuPage extends Component {
       e.preventDefault();
       const formData = new FormData(form);
       console.log(formData.getAll("products"));
+      Cart.items = formData.getAll("products");
     });
   }
 }

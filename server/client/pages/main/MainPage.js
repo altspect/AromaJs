@@ -1,4 +1,4 @@
-import Component from "../../core/component.js";
+import Component from "../../core/services/component.js";
 
 export default class MainPage extends Component {}
 
