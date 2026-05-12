@@ -17,6 +17,10 @@ app.use(
 );
 app.use(cors());
 
+app.get("/", (req, res) => {
+  res.redirect("/main");
+});
+
 app.use(express.static("client"));
 
 app.get(/.*/, (req, res) => {

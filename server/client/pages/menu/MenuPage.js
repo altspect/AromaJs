@@ -13,7 +13,6 @@ export default class MenuPage extends Component {
     btn.addEventListener("click", (e) => {
       e.preventDefault();
       const formData = new FormData(form);
-      console.log(formData.getAll("products"));
       Cart.items = formData.getAll("products");
     });
   }

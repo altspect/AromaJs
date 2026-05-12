@@ -22,39 +22,57 @@ const pages = [
 
 const Router = {
   init: () => {
-    if (window.location.pathname !== "/") {
-      Router.go(
-        window.location.pathname.slice(1, window.location.pathname.length),
-      );
-    }
+    const initialPath = window.location.pathname.slice(1) || "main";
+    Router.go(initialPath, false);
+
+    window.addEventListener("popstate", (event) => {
+      const path = window.location.pathname.slice(1);
+      Router.go(path, false);
+    });
 
     document.addEventListener(`click`, (e) => {
-      const origin = e.target.closest(`a`);
-      const isGlobal = e.target.className === "link-global";
+      const path = e.composedPath();
+      const link = path.find((el) => el.tagName === "A");
+      console.log(link);
 
-      if (origin) {
+      if (!link) return;
+
+      const isGlobal = link.classList.contains("link-global");
+
+      if (isGlobal) {
         e.preventDefault();
-        const navigatedPage =
-          origin.href.split("/")[origin.href.split("/").length - 1];
-
-        if (isGlobal && window.location.pathname !== navigatedPage) {
-          history.replaceState({}, "", "/");
-          history.pushState({}, "", navigatedPage);
-        }
-        Router.go(navigatedPage);
+        const url = link.getAttribute("href");
+        console.log(url);
+        // Przechodzimy do strony
+        Router.go(url);
       }
     });
   },
-  go: (location) => {
-    const elementToRender = pages.find((page) => {
-      return page.url === location;
-    });
+  go: (location, addToHistory = true) => {
+    const elementToRender = pages.find((page) => page.url === location);
+
+    if (!elementToRender) {
+      console.error("Page not found:", location);
+      return;
+    }
+
+    // 3. Aktualizacja adresu URL w przeglądarce bez przeładowania
+    if (addToHistory) {
+      window.history.pushState({ location }, "", `/${location}`);
+    }
+
     const root = document.getElementById("app");
     const newPage = document.createElement(elementToRender.component);
+
+    // Ustawienia dla Web Componentu
     newPage.templatePromise = null;
     newPage.templateURL = elementToRender.templateURL;
+
     root.innerHTML = "";
     root.appendChild(newPage);
+
+    // Opcjonalnie: scroll na górę strony przy zmianie
+    window.scrollTo(0, 0);
   },
 };
 

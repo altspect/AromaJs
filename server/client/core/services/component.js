@@ -15,10 +15,8 @@ export default class Component extends HTMLElement {
     if (Component.#templateCache.has(url)) {
       return Component.#templateCache.get(url);
     }
-    console.log(url);
     const promise = fetch(`http://localhost:3000/${url}`)
       .then((res) => {
-        console.log(res);
         if (!res.ok)
           throw new Error(`HTTP ${res.status} - Could not load ${url}`);
         return res.text();
@@ -27,7 +25,6 @@ export default class Component extends HTMLElement {
         const parser = new DOMParser();
         const doc = parser.parseFromString(htmlString, "text/html");
         const template = doc.querySelector("template");
-        console.log(template);
 
         if (!template) {
           throw new Error(
